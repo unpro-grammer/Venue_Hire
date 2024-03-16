@@ -8,7 +8,7 @@ public class VenueHireSystem {
   public VenueHireSystem() {}
 
   public void printVenues() {
-    System.out.println("There are no venues in the system. Please create a venue first.");
+    System.out.println(MessageCli.NO_VENUES);
   }
 
   public void createVenue(

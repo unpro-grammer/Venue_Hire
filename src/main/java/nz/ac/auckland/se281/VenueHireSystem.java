@@ -6,7 +6,7 @@ import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
 
-  ArrayList<String> venues = new ArrayList<>();
+  ArrayList<Venue> venues = new ArrayList<>();
 
   public VenueHireSystem() {}
 
@@ -19,7 +19,8 @@ public class VenueHireSystem {
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    // TODO implement this method
+    Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
+    venues.add(currentVenue);
   }
 
   public void setSystemDate(String dateInput) {

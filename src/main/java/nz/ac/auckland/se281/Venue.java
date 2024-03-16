@@ -6,7 +6,12 @@ public class Venue {
   private String capacityInput;
   private String hirefeeInput;
 
-  public Venue() {}
+  public Venue(String venueName, String venueCode, String capacityInput, String hireFeeInput) {
+    this.venueName = venueName;
+    this.venueCode = venueCode;
+    this.capacityInput = capacityInput;
+    this.hirefeeInput = hireFeeInput;
+  }
 
   public String getVenueName() {
     return venueName;

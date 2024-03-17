@@ -6,15 +6,17 @@ import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
 
-  ArrayList<Venue> venues = new ArrayList<>();
-  ArrayList<String> allVenueCodes = new ArrayList<>();
+  private ArrayList<Venue> venues = new ArrayList<>();
+  private ArrayList<String> allVenueCodes = new ArrayList<>();
 
   public VenueHireSystem() {}
 
   public void printVenues() {
     String numberToPrint = null;
-    String verb = "are";
-    String suffix = "s";
+    String verb = "are"; // are for plural, is for singular
+    String suffix = "s"; // s for plural, "" for singular
+
+    // convert single-digit numbers to word form
     switch (venues.size()) {
       case 0:
         System.out.println(MessageCli.NO_VENUES);
@@ -49,9 +51,10 @@ public class VenueHireSystem {
         numberToPrint = "nine";
         break;
       default:
-        numberToPrint = venues.size() + "";
+        numberToPrint = venues.size() + ""; // 10 or greater represented numerically
     }
 
+    // list out all venues and their details given at least one is registered
     if (!(venues.isEmpty())) {
       MessageCli.NUMBER_VENUES.printMessage(verb, numberToPrint, suffix);
       for (Venue eachVenue : venues) {
@@ -84,7 +87,7 @@ public class VenueHireSystem {
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
 
-    venueCode = venueCode.toUpperCase();
+    venueCode = venueCode.toUpperCase(); // treat all venue codes as capitalised
     boolean validVenueCreation = true;
 
     // check for invalid arguments
@@ -99,12 +102,16 @@ public class VenueHireSystem {
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, existingVenue);
         }
       }
+
+      // check whether capacity or hire fee is an integer
     } else if (!(isInteger(capacityInput))) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
       validVenueCreation = false;
     } else if (!(isInteger(hireFeeInput))) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
       validVenueCreation = false;
+
+      // check whether an integer value for capacity or hire fee is positive (short circuit)
     } else if ((isInteger(capacityInput)) && !isPositive(capacityInput)) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
       validVenueCreation = false;
@@ -113,6 +120,7 @@ public class VenueHireSystem {
       validVenueCreation = false;
     }
 
+    // add valid venue creations to venues list, and its code to list of unique venue codes
     if (validVenueCreation) {
       Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
       venues.add(currentVenue);

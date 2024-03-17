@@ -727,16 +727,131 @@ public class MainTest {
     }
 
     @Test
+    public void elevenvenues() throws Exception {
+      runCommands(
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFH",
+          "1",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFa",
+          "2",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFd",
+          "3",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFs",
+          "4",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFh",
+          "343434",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFg",
+          "5",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFw",
+          "6",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FF2",
+          "7",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFb",
+          "8",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFu",
+          "9",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFj",
+          "80",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "aFj",
+          "80",
+          "150", //
+          PRINT_VENUES);
+
+      assertContains("There are 11 venues in the system:");
+      assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
+      assertDoesNotContain("Please create a venue first", true);
+    }
+
+    @Test
     public void ninevenues() throws Exception {
       runCommands(
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
           "FFH",
-          "80",
+          "1",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFa",
+          "2",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFd",
+          "3",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFs",
+          "4",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFh",
+          "343434",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFg",
+          "5",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFw",
+          "6",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FF2",
+          "7",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFb",
+          "8",
+          "150", //
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFu",
+          "9",
           "150", //
           PRINT_VENUES);
 
-      assertContains("There is one venue in the system:");
+      assertContains("There are nine venues in the system:");
       assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
       assertDoesNotContain("Please create a venue first", true);
     }

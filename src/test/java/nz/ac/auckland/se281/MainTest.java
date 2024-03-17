@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
   MainTest.Task1.class,
   // MainTest.Task2.class,
   // MainTest.Task3.class,
-  // MainTest.YourTests.class, // Uncomment this line to run your own tests
+  MainTest.YourTests.class, // Uncomment this line to run your own tests
 })
 public class MainTest {
 
@@ -136,6 +136,13 @@ public class MainTest {
     public static class YourTests extends CliTest {
       public YourTests() {
         super(Main.class);
+      }
+
+      @Test
+      public void T1_01_no_venues() throws Exception {
+        runCommands(PRINT_VENUES);
+
+        assertContains("There are no venues in the system. Please create a venue first.");
       }
     }
   }
@@ -703,15 +710,35 @@ public class MainTest {
       super(Main.class);
     }
 
-    @Override
-    public void reset() {
-      BookingReferenceGenerator.reset();
+    @Test
+    public void negativehirefee() throws Exception {
+      runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "67567", "-1");
+
+      assertContains("Venue not created: hire fee must be a positive number.");
+      assertDoesNotContain("Successfully created venue", true);
     }
 
     @Test
-    public void T4_01_add_your_own_tests_as_needed() throws Exception {
-      runCommands(PRINT_VENUES);
-      assertContains("There are no venues in the system. Please create a venue first.");
+    public void spaceonly() throws Exception {
+      runCommands(CREATE_VENUE, "'    '", "FFH", "150", "75765");
+
+      assertContains("Venue not created: venue name must not be empty.");
+      assertDoesNotContain("Successfully created venue", true);
+    }
+
+    @Test
+    public void ninevenues() throws Exception {
+      runCommands(
+          CREATE_VENUE,
+          "'Frugal Fiesta Hall'",
+          "FFH",
+          "80",
+          "150", //
+          PRINT_VENUES);
+
+      assertContains("There is one venue in the system:");
+      assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
+      assertDoesNotContain("Please create a venue first", true);
     }
   }
 

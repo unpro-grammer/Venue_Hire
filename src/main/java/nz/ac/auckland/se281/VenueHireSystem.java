@@ -14,6 +14,7 @@ public class VenueHireSystem {
   public void printVenues() {
     String numberToPrint = null;
     String verb = "are";
+    String suffix = "s";
     switch (venues.size()) {
       case 0:
         System.out.println(MessageCli.NO_VENUES);
@@ -21,6 +22,7 @@ public class VenueHireSystem {
       case 1:
         numberToPrint = "one";
         verb = "is";
+        suffix = "";
         break;
       case 2:
         numberToPrint = "two";
@@ -46,10 +48,12 @@ public class VenueHireSystem {
       case 9:
         numberToPrint = "nine";
         break;
+      default:
+        numberToPrint = venues.size() + "";
     }
 
     if (!(venues.isEmpty())) {
-      MessageCli.NUMBER_VENUES.printMessage(verb, numberToPrint);
+      MessageCli.NUMBER_VENUES.printMessage(verb, numberToPrint, suffix);
     }
   }
 

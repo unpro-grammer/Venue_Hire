@@ -64,12 +64,30 @@ public class VenueHireSystem {
     }
   }
 
+  public boolean isInteger(String number) {
+    try {
+      Integer.parseInt(number);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public boolean isPositive(String number) {
+    int num = Integer.parseInt(number);
+    if (num > 0) {
+      return true;
+    }
+    return false;
+  }
+
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
 
     venueCode = venueCode.toUpperCase();
     boolean validVenueCreation = true;
 
+    // check for invalid arguments
     if (venueName.trim().isEmpty()) {
       validVenueCreation = false;
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage("");
@@ -81,12 +99,14 @@ public class VenueHireSystem {
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, existingVenue);
         }
       }
+    } else if (!(isValidNumber(capacityInput))) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity ");
     }
 
     if (validVenueCreation) {
       Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
       venues.add(currentVenue);
-      allVenueCodes.add(venueCode.toUpperCase());
+      allVenueCodes.add(venueCode);
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
   }

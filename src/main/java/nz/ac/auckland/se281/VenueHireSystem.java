@@ -14,13 +14,19 @@ public class VenueHireSystem {
     switch (venues.size()) {
       case 0:
         System.out.println(MessageCli.NO_VENUES);
+        break;
+      case 1:
+        MessageCli.NUMBER_VENUES.printMessage("is", "one");
+        break;
     }
   }
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
+
     Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
     venues.add(currentVenue);
+    MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
   }
 
   public void setSystemDate(String dateInput) {

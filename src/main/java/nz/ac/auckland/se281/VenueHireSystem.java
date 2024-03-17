@@ -7,6 +7,7 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
 
   ArrayList<Venue> venues = new ArrayList<>();
+  ArrayList<String> allVenueCodes = new ArrayList<>();
 
   public VenueHireSystem() {}
 
@@ -24,16 +25,28 @@ public class VenueHireSystem {
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
 
+    venueCode = venueCode.toUpperCase();
     boolean validVenueCreation = true;
 
     if (venueName.trim().isEmpty()) {
       validVenueCreation = false;
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage("");
+    } else if (allVenueCodes.contains(venueCode)) {
+      validVenueCreation = false;
+      for (Venue eachVenue : venues) {
+        String existingCode = eachVenue.getVenueCode();
+        boolean equals = existingCode == venueCode;
+        if (equals) {
+          String existingVenue = eachVenue.getVenueName();
+          MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, existingVenue);
+        }
+      }
     }
 
     if (validVenueCreation) {
       Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
       venues.add(currentVenue);
+      allVenueCodes.add(venueCode.toUpperCase());
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
   }

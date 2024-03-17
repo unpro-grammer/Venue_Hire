@@ -34,9 +34,7 @@ public class VenueHireSystem {
     } else if (allVenueCodes.contains(venueCode)) {
       validVenueCreation = false;
       for (Venue eachVenue : venues) {
-        String existingCode = eachVenue.getVenueCode();
-        boolean equals = existingCode == venueCode;
-        if (equals) {
+        if (eachVenue.getVenueCode().equals(venueCode)) {
           String existingVenue = eachVenue.getVenueName();
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, existingVenue);
         }

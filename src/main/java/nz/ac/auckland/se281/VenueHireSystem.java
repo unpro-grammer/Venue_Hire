@@ -54,6 +54,13 @@ public class VenueHireSystem {
 
     if (!(venues.isEmpty())) {
       MessageCli.NUMBER_VENUES.printMessage(verb, numberToPrint, suffix);
+      for (Venue eachVenue : venues) {
+        MessageCli.VENUE_ENTRY.printMessage(
+            eachVenue.getVenueName(),
+            eachVenue.getVenueCode(),
+            eachVenue.getCapacityInput(),
+            eachVenue.getHireFeeInput());
+      }
     }
   }
 

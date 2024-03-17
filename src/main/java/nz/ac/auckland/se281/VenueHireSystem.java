@@ -101,9 +101,16 @@ public class VenueHireSystem {
       }
     } else if (!(isInteger(capacityInput))) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
-
+      validVenueCreation = false;
     } else if (!(isInteger(hireFeeInput))) {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
+      validVenueCreation = false;
+    } else if ((isInteger(capacityInput)) && !isPositive(capacityInput)) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
+      validVenueCreation = false;
+    } else if ((isInteger(hireFeeInput)) && !isPositive(hireFeeInput)) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
+      validVenueCreation = false;
     }
 
     if (validVenueCreation) {

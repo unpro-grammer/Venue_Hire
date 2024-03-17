@@ -99,8 +99,11 @@ public class VenueHireSystem {
           MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(venueCode, existingVenue);
         }
       }
-    } else if (!(isValidNumber(capacityInput))) {
-      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity ");
+    } else if (!(isInteger(capacityInput))) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
+
+    } else if (!(isInteger(hireFeeInput))) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
     }
 
     if (validVenueCreation) {

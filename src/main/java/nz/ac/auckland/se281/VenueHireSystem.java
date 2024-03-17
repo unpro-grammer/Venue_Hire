@@ -12,13 +12,44 @@ public class VenueHireSystem {
   public VenueHireSystem() {}
 
   public void printVenues() {
+    String numberToPrint = null;
+    String verb = "are";
     switch (venues.size()) {
       case 0:
         System.out.println(MessageCli.NO_VENUES);
         break;
       case 1:
-        MessageCli.NUMBER_VENUES.printMessage("is", "one");
+        numberToPrint = "one";
+        verb = "is";
         break;
+      case 2:
+        numberToPrint = "two";
+        break;
+      case 3:
+        numberToPrint = "three";
+        break;
+      case 4:
+        numberToPrint = "four";
+        break;
+      case 5:
+        numberToPrint = "five";
+        break;
+      case 6:
+        numberToPrint = "six";
+        break;
+      case 7:
+        numberToPrint = "seven";
+        break;
+      case 8:
+        numberToPrint = "eight";
+        break;
+      case 9:
+        numberToPrint = "nine";
+        break;
+    }
+
+    if (!(venues.isEmpty())) {
+      MessageCli.NUMBER_VENUES.printMessage(verb, numberToPrint);
     }
   }
 

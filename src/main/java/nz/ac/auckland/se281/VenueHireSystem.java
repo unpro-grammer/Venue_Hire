@@ -289,7 +289,7 @@ public class VenueHireSystem {
 
     Venue venueOfInterest = null;
 
-    if (!(allVenueCodes.contains(venueCode)) || venues.isEmpty()) {
+    if (venues.isEmpty() || !(allVenueCodes.contains(venueCode))) {
       MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
     } else {
       for (Venue venue : venues) {

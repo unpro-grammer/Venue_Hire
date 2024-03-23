@@ -143,7 +143,35 @@ public class VenueHireSystem {
     }
   }
 
+  private boolean bookingIsInFuture(String systemDate, String bookingDate) {
+
+    // organise components of systemDate
+    String[] systemDateParts = systemDate.split("/");
+    int sysDay = Integer.parseInt(systemDateParts[0]);
+    int sysMonth = Integer.parseInt(systemDateParts[1]);
+    int sysYear = Integer.parseInt(systemDateParts[2]);
+
+    // organise components of bookingDate
+    String[] bookingDateParts = bookingDate.split("/");
+    int bookingDay = Integer.parseInt(bookingDateParts[0]);
+    int bookingMonth = Integer.parseInt(bookingDateParts[1]);
+    int bookingYear = Integer.parseInt(bookingDateParts[2]);
+
+    // check that booking date is in the future
+    if (bookingYear < sysYear) {
+      return false;
+    } else if ((bookingYear == sysYear) && (bookingMonth < sysMonth)) {
+      return false;
+    } else if ((bookingYear == sysYear) && (bookingMonth == sysMonth) && (bookingDay < sysDay)) {
+      return false;
+    }
+
+    return true;
+  }
+
   public void makeBooking(String[] options) {
+
+    // check that the booking proposed to be made is not invalid.
 
     if (systemDate.isEmpty()) {
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
@@ -151,9 +179,10 @@ public class VenueHireSystem {
       MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
     } else if (!(allVenueCodes.contains(options[0]))) {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);
+    } else if (!(bookingIsInFuture(systemDate, options[1]))) {
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
     }
-    // account for venue not available on specified date, and booking is
-    // not today or beyond
+    // account for venue not available on specified date
 
     // if all goes well, make the booking
   }

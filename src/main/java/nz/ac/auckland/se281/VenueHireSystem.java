@@ -278,6 +278,7 @@ public class VenueHireSystem {
       Booking booking =
           new Booking(venueToBook, bookingDate, customerEmail, attendeesCount, bookingRef);
       bookings.add(booking);
+      venueToBook.addBookingInstance(booking);
       MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
           bookingRef, venueToBook.getVenueName(), bookingDate, attendeesCount);
       updateNextAvailableDate(venueToBook);

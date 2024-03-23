@@ -8,6 +8,7 @@ public class VenueHireSystem {
 
   private ArrayList<Venue> venues = new ArrayList<>();
   private ArrayList<String> allVenueCodes = new ArrayList<>();
+  private ArrayList<Booking> bookings = new ArrayList<>();
 
   private String systemDate = "";
 
@@ -169,18 +170,41 @@ public class VenueHireSystem {
     return true;
   }
 
+  private boolean venueAvailableThen() {
+    return true;
+  }
+
   public void makeBooking(String[] options) {
 
     // check that the booking proposed to be made is not invalid.
+    String venueCode = options[0];
+    String bookingDate = options[1];
+    String customerEmail = options[2];
+    int attendeesCount = Integer.parseInt(options[3]);
 
     if (systemDate.isEmpty()) {
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
     } else if (venues.isEmpty()) {
       MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
-    } else if (!(allVenueCodes.contains(options[0]))) {
-      MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);
-    } else if (!(bookingIsInFuture(systemDate, options[1]))) {
-      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(options[1], systemDate);
+    } else if (!(allVenueCodes.contains(venueCode))) {
+      MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
+    } else if (!(bookingIsInFuture(systemDate, bookingDate))) {
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(bookingDate, systemDate);
+    } else { // successful booking
+      String bookingRef = BookingReferenceGenerator.generateBookingReference();
+
+      String venueName = "";
+      for (Venue venue : venues) {
+        if (venue.getVenueCode().equals(venueCode)) {
+          venueName = venue.getVenueName();
+        }
+      }
+
+      Booking booking =
+          new Booking(venueCode, bookingDate, customerEmail, attendeesCount, bookingRef);
+      bookings.add(booking);
+      MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
+          bookingRef, venueName, bookingDate, options[3]);
     }
     // account for venue not available on specified date
 

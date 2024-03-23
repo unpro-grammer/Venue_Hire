@@ -380,14 +380,16 @@ public class VenueHireSystem {
       MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(thisBooking.getVenue().getHireFeeInput());
 
       for (Service service : thisBooking.getServices()) {
-        if (service.getClass().getName().equals("CateringService")) {
-          service = (CateringService) service;
-        } else if (service.getClass().getName().equals("MusicService")) {
-          service = (MusicService) service;
-        } else if (service.getClass().getName().equals("FloralService")) {
-          service = (FloralService) service;
+        if (service instanceof CateringService) {
+          CateringService serviceC = (CateringService) service;
+          serviceC.printInvoiceDeets();
+        } else if (service instanceof MusicService) {
+          MusicService serviceM = (MusicService) service;
+          serviceM.printInvoiceDeets();
+        } else if (service instanceof FloralService) {
+          FloralService serviceF = (FloralService) service;
+          serviceF.printInvoiceDeets();
         }
-        service.printInvoiceDeets();
       }
     }
   }

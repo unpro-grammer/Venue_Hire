@@ -1,11 +1,14 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+
 public class Booking {
   private Venue venue;
   private String date;
   private String customerEmail;
   private String attendeesCount;
   private String bookingReference;
+  private ArrayList<Service> services = new ArrayList<>();
 
   public Booking(
       Venue venue,
@@ -34,5 +37,9 @@ public class Booking {
 
   public String getReference() {
     return bookingReference;
+  }
+
+  public void addService(Service service) {
+    services.add(service);
   }
 }

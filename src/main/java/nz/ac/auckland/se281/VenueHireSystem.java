@@ -276,7 +276,8 @@ public class VenueHireSystem {
       attendeesCount = adjustAttendeesCount(attendeesCount, venueToBook.getCapacityInput());
 
       Booking booking =
-          new Booking(venueToBook, bookingDate, customerEmail, attendeesCount, bookingRef);
+          new Booking(
+              venueToBook, bookingDate, systemDate, customerEmail, attendeesCount, bookingRef);
       bookings.add(booking);
       venueToBook.addBookingInstance(booking);
       MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
@@ -364,6 +365,12 @@ public class VenueHireSystem {
   }
 
   public void viewInvoice(String bookingReference) {
-    // TODO implement this method
+    if (!(bookingRefExists(bookingReference))) {
+      MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
+    } else {
+      Booking thisBooking = getBooking(bookingReference);
+      MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(
+          bookingReference, thisBooking.getCustomerEmail());
+    }
   }
 }

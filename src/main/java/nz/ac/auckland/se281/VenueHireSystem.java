@@ -365,6 +365,9 @@ public class VenueHireSystem {
   }
 
   public void viewInvoice(String bookingReference) {
+
+    int totalCost = 0;
+
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {
@@ -390,7 +393,11 @@ public class VenueHireSystem {
           FloralService serviceF = (FloralService) service;
           serviceF.printInvoiceDeets();
         }
+
+        totalCost += service.getCost();
       }
+
+      MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(totalCost + "");
     }
   }
 }

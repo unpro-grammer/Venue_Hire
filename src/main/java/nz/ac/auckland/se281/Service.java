@@ -10,4 +10,8 @@ public abstract class Service {
   public abstract void printAddedToBooking(String bookingRef);
 
   public abstract void printInvoiceDeets();
+
+  public int getCost() {
+    return cost;
+  }
 }

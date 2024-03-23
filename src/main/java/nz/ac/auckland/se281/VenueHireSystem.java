@@ -214,10 +214,10 @@ public class VenueHireSystem {
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
     } else if (venues.isEmpty()) {
       MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
-    } else if (!(bookingIsInFuture(systemDate, bookingDate))) {
-      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(bookingDate, systemDate);
     } else if (!(allVenueCodes.contains(venueCode))) {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
+    } else if (!(bookingIsInFuture(systemDate, bookingDate))) {
+      MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(bookingDate, systemDate);
     } else if (!(venueAvailableThen(venueCode, bookingDate))) {
       // no statements as the function in the expression already executes
     } else { // successful booking

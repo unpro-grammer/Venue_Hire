@@ -69,7 +69,7 @@ public class VenueHireSystem {
     }
   }
 
-  public boolean isInteger(String number) {
+  private boolean isInteger(String number) {
     try {
       Integer.parseInt(number);
       return true;
@@ -78,7 +78,7 @@ public class VenueHireSystem {
     }
   }
 
-  public boolean isPositive(String number) {
+  private boolean isPositive(String number) {
     int num = Integer.parseInt(number);
     if (num > 0) {
       return true;
@@ -144,7 +144,14 @@ public class VenueHireSystem {
   }
 
   public void makeBooking(String[] options) {
-    // TODO implement this method
+
+    if (systemDate.isEmpty()) {
+      MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
+    } else if (venues.isEmpty()) {
+      MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
+    } else if (!(allVenueCodes.contains(options[0]))) {
+      MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);
+    }
   }
 
   public void printBookings(String venueCode) {

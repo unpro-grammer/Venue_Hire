@@ -177,7 +177,7 @@ public class VenueHireSystem {
     return true;
   }
 
-  private boolean venueAvailableThen(String venueCode, String bookingDate) {
+  private boolean venueIsAvailableThen(String venueCode, String bookingDate) {
 
     // checks that the same venue has not already been booked on a given day
     for (Booking booking : bookings) {
@@ -264,7 +264,7 @@ public class VenueHireSystem {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
     } else if (!(bookingIsInFuture(systemDate, bookingDate))) {
       MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(bookingDate, systemDate);
-    } else if (!(venueAvailableThen(venueCode, bookingDate))) {
+    } else if (!(venueIsAvailableThen(venueCode, bookingDate))) {
       // no statements as the function in the expression already executes
     } else { // successful booking
       String bookingRef = BookingReferenceGenerator.generateBookingReference();
@@ -383,6 +383,8 @@ public class VenueHireSystem {
 
     int totalCost = 0;
     totalCost += getBooking(bookingReference).getVenueHireFeeofBooking();
+
+    // if booking reference is valid, proceed to print venue invoice piece by piece
 
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);

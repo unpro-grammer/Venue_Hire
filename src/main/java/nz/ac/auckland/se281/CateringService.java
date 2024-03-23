@@ -12,4 +12,9 @@ public class CateringService extends Service {
   public String getCateringType() {
     return "Catering (" + cateringType + ")";
   }
+
+  @Override
+  public void printAddedToBooking(String cateringName, String bookingReference) {
+    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(cateringName, bookingReference);
+  }
 }

@@ -339,13 +339,17 @@ public class VenueHireSystem {
               cateringType.getName(),
               getBooking(bookingReference).getAttendeesCount());
       getBooking(bookingReference).addService(catering);
-      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(catering.getCateringType(), bookingReference);
+      catering.printAddedToBooking(catering.getCateringType(), bookingReference);
     }
   }
 
   public void addServiceMusic(String bookingReference) {
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
+    } else {
+      MusicService music = new MusicService(500);
+      getBooking(bookingReference).addService(music);
+      // Message
     }
   }
 

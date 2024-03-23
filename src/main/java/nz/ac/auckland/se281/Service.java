@@ -6,4 +6,6 @@ public abstract class Service {
   public Service(int cost) {
     this.cost = cost;
   }
+
+  public abstract void printAddedToBooking(String name, String bookingRef);
 }

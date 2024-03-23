@@ -5,4 +5,9 @@ public class MusicService extends Service {
   public MusicService(int cost) {
     super(cost);
   }
+
+  @Override
+  public void printAddedToBooking(String music, String bookingReference) {
+    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(music, bookingReference);
+  }
 }

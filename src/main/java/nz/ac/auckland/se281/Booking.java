@@ -50,11 +50,19 @@ public class Booking {
     return Integer.parseInt(attendeesCount);
   }
 
+  public String getAttendeesCountString() {
+    return attendeesCount;
+  }
+
   public String getCustomerEmail() {
     return customerEmail;
   }
 
   public String getDateOfBooking() {
     return dateOfBooking;
+  }
+
+  public Venue getVenue() {
+    return venue;
   }
 }

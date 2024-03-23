@@ -370,7 +370,15 @@ public class VenueHireSystem {
     } else {
       Booking thisBooking = getBooking(bookingReference);
       MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(
-          bookingReference, thisBooking.getCustomerEmail());
+          bookingReference,
+          thisBooking.getCustomerEmail(),
+          thisBooking.getDateOfBooking(),
+          thisBooking.getDate(),
+          thisBooking.getAttendeesCountString(),
+          thisBooking.getVenueNameofBooking());
+
+      MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(thisBooking.getVenue().getHireFeeInput());
+      // MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(null);
     }
   }
 }

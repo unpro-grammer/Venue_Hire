@@ -158,7 +158,7 @@ public class VenueHireSystem {
     int bookingMonth = Integer.parseInt(bookingDateParts[1]);
     int bookingYear = Integer.parseInt(bookingDateParts[2]);
 
-    // check that booking date is in the future
+    // check that booking date is today or beyond
     if (bookingYear < sysYear) {
       return false;
     } else if ((bookingYear == sysYear) && (bookingMonth < sysMonth)) {
@@ -174,13 +174,28 @@ public class VenueHireSystem {
     return true;
   }
 
+  private String adjustAttendeesCount(String attendeesCount, String venueCapacity) {
+    int attendeesCountInt = Integer.parseInt(attendeesCount);
+    int venueCapInt = Integer.parseInt(venueCapacity);
+
+    int lowerlimit = venueCapInt / 4; // minimum 25% of spaces occupied
+
+    if (attendeesCountInt < lowerlimit) {
+      attendeesCountInt = lowerlimit;
+    } else if (attendeesCountInt > venueCapInt) {
+      attendeesCountInt = venueCapInt;
+    }
+
+    return attendeesCountInt + "";
+  }
+
   public void makeBooking(String[] options) {
 
     // check that the booking proposed to be made is not invalid.
     String venueCode = options[0];
     String bookingDate = options[1];
     String customerEmail = options[2];
-    int attendeesCount = Integer.parseInt(options[3]);
+    String attendeesCount = options[3];
 
     if (systemDate.isEmpty()) {
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
@@ -194,21 +209,25 @@ public class VenueHireSystem {
       String bookingRef = BookingReferenceGenerator.generateBookingReference();
 
       String venueName = "";
+      String venueCapacity = "";
       for (Venue venue : venues) {
         if (venue.getVenueCode().equals(venueCode)) {
           venueName = venue.getVenueName();
+          venueCapacity = venue.getCapacityInput();
         }
       }
+
+      attendeesCount = adjustAttendeesCount(attendeesCount, venueCapacity);
 
       Booking booking =
           new Booking(venueCode, bookingDate, customerEmail, attendeesCount, bookingRef);
       bookings.add(booking);
       MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
-          bookingRef, venueName, bookingDate, options[3]);
+          bookingRef, venueName, bookingDate, attendeesCount);
     }
     // account for venue not available on specified date
+    // adjust attendeesCount as needed
 
-    // if all goes well, make the booking
   }
 
   public void printBookings(String venueCode) {

@@ -30,6 +30,10 @@ public class Venue {
     return hireFeeInput;
   }
 
+  public String getNextAvailableDate() {
+    return nextAvailableDate;
+  }
+
   public void setNextAvailableDate(String nextAvailableDate) {
     this.nextAvailableDate = nextAvailableDate;
   }

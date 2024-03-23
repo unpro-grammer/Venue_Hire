@@ -219,6 +219,8 @@ public class VenueHireSystem {
     String year = (systemDate.split("/"))[2];
     int day = Integer.parseInt(dayComponent);
 
+    String newDate = systemDate;
+
     while (currentNotAvailable) {
       currentNotAvailable = false;
       day += 1;
@@ -226,13 +228,15 @@ public class VenueHireSystem {
       if (day < 10) {
         dayComponent = "0" + dayComponent; // pad single digits with leading 0
       }
-      String newDate = dayComponent + "/" + month + "/" + year;
+      newDate = dayComponent + "/" + month + "/" + year;
       for (Booking booking : bookings) {
         if (booking.getDate().equals(newDate)) {
           currentNotAvailable = true;
         }
       }
     }
+
+    venue.setNextAvailableDate(newDate);
   }
 
   public void makeBooking(String[] options) {

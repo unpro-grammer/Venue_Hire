@@ -50,4 +50,8 @@ public class Venue {
   public void addBookingInstance(Booking booking) {
     allBookings.add(booking);
   }
+
+  public ArrayList<Booking> getBookingHistory() {
+    return allBookings;
+  }
 }

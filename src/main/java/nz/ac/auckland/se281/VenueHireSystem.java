@@ -287,10 +287,26 @@ public class VenueHireSystem {
 
   public void printBookings(String venueCode) {
 
-    if (!(allVenueCodes.contains(venueCode))) {
+    Venue venueOfInterest = null;
+
+    if (!(allVenueCodes.contains(venueCode)) || venues.isEmpty()) {
       MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
     } else {
+      for (Venue venue : venues) {
+        if (venueCode.equals(venue.getVenueCode())) {
+          venueOfInterest = venue;
+        }
+      }
+
       // print bookings (or lack thereof) of the given venue
+      MessageCli.PRINT_BOOKINGS_HEADER.printMessage(venueOfInterest.getVenueName());
+      if (venueOfInterest.getBookingHistory().isEmpty()) {
+        MessageCli.PRINT_BOOKINGS_NONE.printMessage(venueOfInterest.getVenueName());
+      } else {
+        for (Booking booking : venueOfInterest.getBookingHistory()) {
+          MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(booking.getReference(), booking.getDate());
+        }
+      }
     }
   }
 

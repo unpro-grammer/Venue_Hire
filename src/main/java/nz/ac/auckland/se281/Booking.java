@@ -31,4 +31,8 @@ public class Booking {
   public String getVenueNameofBooking() {
     return venue.getVenueName();
   }
+
+  public String getReference() {
+    return bookingReference;
+  }
 }

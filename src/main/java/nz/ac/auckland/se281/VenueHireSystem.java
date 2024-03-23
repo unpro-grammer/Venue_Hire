@@ -143,6 +143,7 @@ public class VenueHireSystem {
   }
 
   public void printSystemDate() {
+
     if (systemDate.isEmpty()) {
       System.out.println("Current system date is not set.");
     } else {
@@ -177,6 +178,8 @@ public class VenueHireSystem {
   }
 
   private boolean venueAvailableThen(String venueCode, String bookingDate) {
+
+    // checks that the same venue has not already been booked on a given day
     for (Booking booking : bookings) {
       if (booking.getVenueCodeofBooking().equals(venueCode)
           && booking.getDate().equals(bookingDate)) {
@@ -312,6 +315,8 @@ public class VenueHireSystem {
   }
 
   private boolean bookingRefExists(String bookingReference) {
+
+    // checks whether the booking reference has been generated
     for (Booking booking : bookings) {
       if (booking.getReference().equals(bookingReference)) {
         return true;
@@ -321,6 +326,8 @@ public class VenueHireSystem {
   }
 
   private Booking getBooking(String bookingRef) {
+
+    // returns instance of booking as identified by booking reference
     for (Booking booking : bookings) {
       if (booking.getReference().equals(bookingRef)) {
         return booking;
@@ -330,6 +337,8 @@ public class VenueHireSystem {
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
+
+    // creates new catering service if booking ref is valid, adding to booking
 
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
@@ -345,6 +354,9 @@ public class VenueHireSystem {
   }
 
   public void addServiceMusic(String bookingReference) {
+
+    // creates new music service if booking ref is valid, adding to booking
+
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
     } else {
@@ -355,6 +367,9 @@ public class VenueHireSystem {
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
+
+    // creates new floral service if booking ref is valid, adding to booking
+
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
@@ -383,6 +398,7 @@ public class VenueHireSystem {
 
       MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(thisBooking.getVenue().getHireFeeInput());
 
+      // cast Service based on sub class in order to access specialised print methods
       for (Service service : thisBooking.getServices()) {
         if (service instanceof CateringService) {
           CateringService serviceC = (CateringService) service;

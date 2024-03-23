@@ -194,12 +194,45 @@ public class VenueHireSystem {
       attendeesCountInt = venueCapInt;
     }
 
+    // print notice if number of attendees has changed from input
     if (!(Integer.parseInt(attendeesCount) == attendeesCountInt)) {
       MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
           attendeesCount, (attendeesCountInt + ""), venueCapacity);
     }
 
     return attendeesCountInt + "";
+  }
+
+  public void updateNextAvailableDate(Venue venue) {
+    venue.setNextAvailableDate(systemDate);
+    // the next available date will increment from current system date until no bookings already
+    // exist on a given day
+    boolean currentNotAvailable = false;
+    for (Booking booking : bookings) {
+      if (booking.getDate().equals(systemDate)) {
+        currentNotAvailable = true;
+      }
+    }
+
+    String dayComponent = (systemDate.split("/"))[0];
+    String month = (systemDate.split("/"))[1];
+    String year = (systemDate.split("/"))[2];
+    int day = Integer.parseInt(dayComponent);
+
+    while (currentNotAvailable) {
+      currentNotAvailable = false;
+      day += 1;
+      dayComponent = day + "";
+      if (day < 10) {
+        dayComponent = "0" + dayComponent; // pad single digits with leading 0
+      }
+      String newDate = dayComponent + "/" + month + "/" + year;
+      for (Booking booking : bookings) {
+        if (booking.getDate().equals(newDate)) {
+          currentNotAvailable = true;
+        }
+      }
+    }
   }
 
   public void makeBooking(String[] options) {

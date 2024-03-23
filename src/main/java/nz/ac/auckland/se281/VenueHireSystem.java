@@ -349,7 +349,7 @@ public class VenueHireSystem {
     } else {
       MusicService music = new MusicService(500);
       getBooking(bookingReference).addService(music);
-      // Message
+      music.printAddedToBooking("Music", bookingReference);
     }
   }
 

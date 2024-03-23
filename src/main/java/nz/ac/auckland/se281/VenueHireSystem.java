@@ -319,13 +319,27 @@ public class VenueHireSystem {
     return false;
   }
 
+  private Booking getBooking(String bookingRef) {
+    for (Booking booking : bookings) {
+      if (booking.getReference().equals(bookingRef)) {
+        return booking;
+      }
+    }
+    return null;
+  }
+
   public void addCateringService(String bookingReference, CateringType cateringType) {
 
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     } else {
       CateringService catering =
-          new CateringService(cateringType.getCostPerPerson(), cateringType.getName());
+          new CateringService(
+              cateringType.getCostPerPerson(),
+              cateringType.getName(),
+              getBooking(bookingReference).getAttendeesCount());
+      getBooking(bookingReference).addService(catering);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(catering.getCateringType(), bookingReference);
     }
   }
 

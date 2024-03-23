@@ -42,4 +42,8 @@ public class Booking {
   public void addService(Service service) {
     services.add(service);
   }
+
+  public int getAttendeesCount() {
+    return Integer.parseInt(attendeesCount);
+  }
 }

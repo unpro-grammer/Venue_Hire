@@ -170,7 +170,15 @@ public class VenueHireSystem {
     return true;
   }
 
-  private boolean venueAvailableThen() {
+  private boolean venueAvailableThen(String venueCode, String bookingDate) {
+    for (Booking booking : bookings) {
+      if (booking.getVenueCodeofBooking().equals(venueCode)
+          && booking.getDate().equals(bookingDate)) {
+        String venueName = booking.getVenueNameofBooking();
+        MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(venueName, bookingDate);
+        return false;
+      }
+    }
     return true;
   }
 
@@ -210,29 +218,26 @@ public class VenueHireSystem {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
     } else if (!(bookingIsInFuture(systemDate, bookingDate))) {
       MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(bookingDate, systemDate);
+    } else if (!(venueAvailableThen(venueCode, bookingDate))) {
+      // no statements as the function in the expression already executes
     } else { // successful booking
       String bookingRef = BookingReferenceGenerator.generateBookingReference();
 
-      String venueName = "";
-      String venueCapacity = "";
+      Venue venueToBook = null;
       for (Venue venue : venues) {
         if (venue.getVenueCode().equals(venueCode)) {
-          venueName = venue.getVenueName();
-          venueCapacity = venue.getCapacityInput();
+          venueToBook = venue;
         }
       }
 
-      attendeesCount = adjustAttendeesCount(attendeesCount, venueCapacity);
+      attendeesCount = adjustAttendeesCount(attendeesCount, venueToBook.getCapacityInput());
 
       Booking booking =
-          new Booking(venueCode, bookingDate, customerEmail, attendeesCount, bookingRef);
+          new Booking(venueToBook, bookingDate, customerEmail, attendeesCount, bookingRef);
       bookings.add(booking);
       MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
-          bookingRef, venueName, bookingDate, attendeesCount);
+          bookingRef, venueToBook.getVenueName(), bookingDate, attendeesCount);
     }
-    // account for venue not available on specified date
-    // adjust attendeesCount as needed
-
   }
 
   public void printBookings(String venueCode) {

@@ -1,11 +1,14 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+
 public class Venue {
   private String venueName;
   private String venueCode;
   private String capacityInput;
   private String hireFeeInput;
   private String nextAvailableDate;
+  private ArrayList<Booking> allBookings = new ArrayList<>(); // past and future
 
   public Venue(
       String venueName,
@@ -42,5 +45,9 @@ public class Venue {
 
   public void setNextAvailableDate(String nextAvailableDate) {
     this.nextAvailableDate = nextAvailableDate;
+  }
+
+  public void addBookingInstance(Booking booking) {
+    allBookings.add(booking);
   }
 }

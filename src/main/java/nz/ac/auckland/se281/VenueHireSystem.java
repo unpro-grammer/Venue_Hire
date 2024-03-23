@@ -136,6 +136,7 @@ public class VenueHireSystem {
     MessageCli.DATE_SET.printMessage(dateInput);
     this.systemDate = dateInput;
 
+    // ensure next available dates of all venues aren't in the past
     for (Venue venue : venues) {
       updateNextAvailableDate(venue);
     }
@@ -284,7 +285,12 @@ public class VenueHireSystem {
   }
 
   public void printBookings(String venueCode) {
-    // TODO implement this method
+
+    if (!(allVenueCodes.contains(venueCode))) {
+      MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
+    } else {
+      // print bookings (or lack thereof) of the given venue
+    }
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {

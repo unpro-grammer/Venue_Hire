@@ -152,6 +152,10 @@ public class VenueHireSystem {
     } else if (!(allVenueCodes.contains(options[0]))) {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(options[0]);
     }
+    // account for venue not available on specified date, and booking is
+    // not today or beyond
+
+    // if all goes well, make the booking
   }
 
   public void printBookings(String venueCode) {

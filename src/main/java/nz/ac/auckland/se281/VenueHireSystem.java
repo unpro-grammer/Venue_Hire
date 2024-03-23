@@ -186,6 +186,11 @@ public class VenueHireSystem {
       attendeesCountInt = venueCapInt;
     }
 
+    if (!(Integer.parseInt(attendeesCount) == attendeesCountInt)) {
+      MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
+          attendeesCount, (attendeesCountInt + ""), venueCapacity);
+    }
+
     return attendeesCountInt + "";
   }
 

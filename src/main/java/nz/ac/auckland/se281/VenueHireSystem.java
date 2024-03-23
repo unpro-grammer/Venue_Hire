@@ -9,6 +9,8 @@ public class VenueHireSystem {
   private ArrayList<Venue> venues = new ArrayList<>();
   private ArrayList<String> allVenueCodes = new ArrayList<>();
 
+  private String systemDate = "";
+
   public VenueHireSystem() {}
 
   public void printVenues() {
@@ -129,7 +131,8 @@ public class VenueHireSystem {
   }
 
   public void setSystemDate(String dateInput) {
-    // TODO implement this method
+    MessageCli.DATE_SET.printMessage(dateInput);
+    this.systemDate = dateInput;
   }
 
   public void printSystemDate() {

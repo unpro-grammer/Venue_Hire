@@ -14,7 +14,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
   MainTest.Task1.class,
-  // MainTest.Task2.class,
+  MainTest.Task2.class,
   // MainTest.Task3.class,
   MainTest.YourTests.class, // Uncomment this line to run your own tests
 })
@@ -715,6 +715,22 @@ public class MainTest {
       runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "67567", "-1");
 
       assertContains("Venue not created: hire fee must be a positive number.");
+      assertDoesNotContain("Successfully created venue", true);
+    }
+
+    @Test
+    public void nonNumCapacity() throws Exception {
+      runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "5a", "1");
+
+      assertContains("Venue not created: capacity must be a number.");
+      assertDoesNotContain("Successfully created venue", true);
+    }
+
+    @Test
+    public void nonPosCapacity() throws Exception {
+      runCommands(CREATE_VENUE, "'Frugal Fiesta Hall'", "FFH", "0", "1");
+
+      assertContains("Venue not created: capacity must be a positive number.");
       assertDoesNotContain("Successfully created venue", true);
     }
 

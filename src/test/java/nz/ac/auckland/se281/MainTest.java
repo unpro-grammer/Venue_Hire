@@ -731,12 +731,12 @@ public class MainTest {
       runCommands(
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
-          "FFH",
+          "FF1",
           "1",
           "150", //
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
-          "FFa",
+          "FF1",
           "2",
           "150", //
           CREATE_VENUE,
@@ -776,23 +776,23 @@ public class MainTest {
           "150", //
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
-          "FFu",
+          "FFU",
           "9",
           "150", //
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
-          "FFj",
+          "FFJ",
           "80",
           "150", //
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
-          "aFj",
+          "AFj",
           "80",
           "150", //
           PRINT_VENUES);
 
       assertContains("There are 11 venues in the system:");
-      assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
+      assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFh).");
       assertDoesNotContain("Please create a venue first", true);
     }
 
@@ -801,7 +801,7 @@ public class MainTest {
       runCommands(
           CREATE_VENUE,
           "'Frugal Fiesta Hall'",
-          "FFH",
+          "FFh",
           "1",
           "150", //
           CREATE_VENUE,
@@ -852,7 +852,7 @@ public class MainTest {
           PRINT_VENUES);
 
       assertContains("There are nine venues in the system:");
-      assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFH).");
+      assertContains("Successfully created venue 'Frugal Fiesta Hall' (FFh).");
       assertDoesNotContain("Please create a venue first", true);
     }
   }

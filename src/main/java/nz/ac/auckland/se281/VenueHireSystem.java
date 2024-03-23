@@ -87,7 +87,6 @@ public class VenueHireSystem {
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
 
-    venueCode = venueCode.toUpperCase(); // treat all venue codes as capitalised
     boolean validVenueCreation = true;
 
     // check for invalid arguments

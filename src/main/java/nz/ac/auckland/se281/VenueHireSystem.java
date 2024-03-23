@@ -65,7 +65,8 @@ public class VenueHireSystem {
             eachVenue.getVenueName(),
             eachVenue.getVenueCode(),
             eachVenue.getCapacityInput(),
-            eachVenue.getHireFeeInput());
+            eachVenue.getHireFeeInput(),
+            eachVenue.getNextAvailableDate());
       }
     }
   }
@@ -134,6 +135,10 @@ public class VenueHireSystem {
   public void setSystemDate(String dateInput) {
     MessageCli.DATE_SET.printMessage(dateInput);
     this.systemDate = dateInput;
+
+    for (Venue venue : venues) {
+      updateNextAvailableDate(venue);
+    }
   }
 
   public void printSystemDate() {
@@ -274,6 +279,7 @@ public class VenueHireSystem {
       bookings.add(booking);
       MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
           bookingRef, venueToBook.getVenueName(), bookingDate, attendeesCount);
+      updateNextAvailableDate(venueToBook);
     }
   }
 

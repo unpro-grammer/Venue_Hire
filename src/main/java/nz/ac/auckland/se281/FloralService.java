@@ -18,6 +18,6 @@ public class FloralService extends Service {
 
   @Override
   public void printInvoiceDeets() {
-    MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(typeName, cost + "");
+    MessageCli.INVOICE_CONTENT_FLORAL_ENTRY.printMessage(floralType, cost + "");
   }
 }

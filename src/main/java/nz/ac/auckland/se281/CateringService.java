@@ -18,6 +18,6 @@ public class CateringService extends Service {
 
   @Override
   public void printInvoiceDeets() {
-    MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(typeName, cost + "");
+    MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(cateringType, cost + "");
   }
 }

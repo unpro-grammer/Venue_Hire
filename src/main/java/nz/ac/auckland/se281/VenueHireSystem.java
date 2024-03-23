@@ -378,7 +378,17 @@ public class VenueHireSystem {
           thisBooking.getVenueNameofBooking());
 
       MessageCli.INVOICE_CONTENT_VENUE_FEE.printMessage(thisBooking.getVenue().getHireFeeInput());
-      // MessageCli.INVOICE_CONTENT_CATERING_ENTRY.printMessage(null);
+
+      for (Service service : thisBooking.getServices()) {
+        if (service.getClass().getName().equals("CateringService")) {
+          service = (CateringService) service;
+        } else if (service.getClass().getName().equals("MusicService")) {
+          service = (MusicService) service;
+        } else if (service.getClass().getName().equals("FloralService")) {
+          service = (FloralService) service;
+        }
+        service.printInvoiceDeets();
+      }
     }
   }
 }

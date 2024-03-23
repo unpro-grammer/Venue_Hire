@@ -65,4 +65,8 @@ public class Booking {
   public Venue getVenue() {
     return venue;
   }
+
+  public ArrayList<Service> getServices() {
+    return services;
+  }
 }

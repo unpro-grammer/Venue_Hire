@@ -8,4 +8,6 @@ public abstract class Service {
   }
 
   public abstract void printAddedToBooking(String bookingRef);
+
+  public abstract void printInvoiceDeets();
 }

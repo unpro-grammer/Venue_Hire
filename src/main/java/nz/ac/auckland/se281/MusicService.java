@@ -10,4 +10,9 @@ public class MusicService extends Service {
   public void printAddedToBooking(String bookingReference) {
     MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
   }
+
+  @Override
+  public void printInvoiceDeets() {
+    MessageCli.INVOICE_CONTENT_MUSIC_ENTRY.printMessage(cost + "");
+  }
 }

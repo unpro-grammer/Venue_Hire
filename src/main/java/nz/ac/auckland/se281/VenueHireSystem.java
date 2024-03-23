@@ -339,7 +339,7 @@ public class VenueHireSystem {
               cateringType.getName(),
               getBooking(bookingReference).getAttendeesCount());
       getBooking(bookingReference).addService(catering);
-      catering.printAddedToBooking(catering.getCateringType(), bookingReference);
+      catering.printAddedToBooking(bookingReference);
     }
   }
 
@@ -349,13 +349,17 @@ public class VenueHireSystem {
     } else {
       MusicService music = new MusicService(500);
       getBooking(bookingReference).addService(music);
-      music.printAddedToBooking("Music", bookingReference);
+      music.printAddedToBooking(bookingReference);
     }
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+    } else {
+      FloralService floral = new FloralService(floralType.getCost(), floralType.getName());
+      getBooking(bookingReference).addService(floral);
+      floral.printAddedToBooking(bookingReference);
     }
   }
 

@@ -7,7 +7,7 @@ public class MusicService extends Service {
   }
 
   @Override
-  public void printAddedToBooking(String music, String bookingReference) {
-    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(music, bookingReference);
+  public void printAddedToBooking(String bookingReference) {
+    MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
   }
 }

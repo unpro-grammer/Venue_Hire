@@ -7,5 +7,5 @@ public abstract class Service {
     this.cost = cost;
   }
 
-  public abstract void printAddedToBooking(String name, String bookingRef);
+  public abstract void printAddedToBooking(String bookingRef);
 }

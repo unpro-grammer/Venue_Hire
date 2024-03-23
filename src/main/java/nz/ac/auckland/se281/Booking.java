@@ -38,6 +38,10 @@ public class Booking {
     return venue.getVenueName();
   }
 
+  public int getVenueHireFeeofBooking() {
+    return Integer.parseInt(venue.getHireFeeInput());
+  }
+
   public String getReference() {
     return bookingReference;
   }

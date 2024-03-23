@@ -367,6 +367,7 @@ public class VenueHireSystem {
   public void viewInvoice(String bookingReference) {
 
     int totalCost = 0;
+    totalCost += getBooking(bookingReference).getVenueHireFeeofBooking();
 
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);

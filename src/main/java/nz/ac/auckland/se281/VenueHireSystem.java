@@ -125,7 +125,7 @@ public class VenueHireSystem {
 
     // add valid venue creations to venues list, and its code to list of unique venue codes
     if (validVenueCreation) {
-      Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput);
+      Venue currentVenue = new Venue(venueName, venueCode, capacityInput, hireFeeInput, systemDate);
       venues.add(currentVenue);
       allVenueCodes.add(venueCode);
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);

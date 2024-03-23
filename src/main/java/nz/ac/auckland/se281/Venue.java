@@ -5,13 +5,19 @@ public class Venue {
   private String venueCode;
   private String capacityInput;
   private String hireFeeInput;
-  private String nextAvailableDate = "";
+  private String nextAvailableDate;
 
-  public Venue(String venueName, String venueCode, String capacityInput, String hireFeeInput) {
+  public Venue(
+      String venueName,
+      String venueCode,
+      String capacityInput,
+      String hireFeeInput,
+      String nextAvailableDate) {
     this.venueName = venueName;
     this.venueCode = venueCode;
     this.capacityInput = capacityInput;
     this.hireFeeInput = hireFeeInput;
+    this.nextAvailableDate = nextAvailableDate;
   }
 
   public String getVenueName() {

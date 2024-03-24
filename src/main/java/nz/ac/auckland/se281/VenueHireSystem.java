@@ -215,9 +215,9 @@ public class VenueHireSystem {
   public void updateNextAvailableDate(Venue venue) {
     venue.setNextAvailableDate(systemDate);
     // the next available date will increment from current system date until no bookings already
-    // exist on a given day
+    // exist on a given day for a given venue
     boolean currentNotAvailable = false;
-    for (Booking booking : bookings) {
+    for (Booking booking : venue.getBookingHistory()) { // only look at this venue's bookings
       if (booking.getDate().equals(systemDate)) {
         currentNotAvailable = true;
       }
@@ -238,7 +238,7 @@ public class VenueHireSystem {
         dayComponent = "0" + dayComponent; // pad single digits with leading 0
       }
       newDate = dayComponent + "/" + month + "/" + year;
-      for (Booking booking : bookings) {
+      for (Booking booking : venue.getBookingHistory()) {
         if (booking.getDate().equals(newDate)) {
           currentNotAvailable = true;
         }
@@ -381,15 +381,14 @@ public class VenueHireSystem {
 
   public void viewInvoice(String bookingReference) {
 
-    int totalCost = 0;
-    totalCost += getBooking(bookingReference).getVenueHireFeeofBooking();
-
     // if booking reference is valid, proceed to print venue invoice piece by piece
 
     if (!(bookingRefExists(bookingReference))) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {
+      int totalCost = 0;
       Booking thisBooking = getBooking(bookingReference);
+      totalCost += thisBooking.getVenueHireFeeofBooking();
       MessageCli.INVOICE_CONTENT_TOP_HALF.printMessage(
           bookingReference,
           thisBooking.getCustomerEmail(),

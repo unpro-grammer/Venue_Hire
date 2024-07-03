@@ -1,3 +1,3 @@
 # Assignment 1
 
-You will find instructions for this assignment on the course website.
+Venue Hire System developed to manage venue bookings via terminal-based UI.
